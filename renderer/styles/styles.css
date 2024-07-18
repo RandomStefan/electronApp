@@ -199,5 +199,5 @@ body {
   .btn:where(:hover, :focus) {
     color: #fff;
   }
-  
+
    
