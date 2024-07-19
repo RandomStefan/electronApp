@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <title>AplicatieTestare</title>
     <link rel="stylesheet" href="../styles/styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <meta
       http-equiv="Content-Security-Policy"
       content="script-src 'self' 'unsafe-inline';"
@@ -44,6 +45,9 @@
         </div>
         <div class="footer-right">
           <button onclick="openPDF('assets/help.pdf')">Ajutor</button>
+          <button class="svg-button" onclick="toggleDevTools()" aria-label="Dev Tools">
+            <i class="fas fa-cog"></i>
+          </button>
         </div>
       </footer>
       <script src="../scripts/renderer.js"></script>

@@ -1,9 +1,15 @@
 const { app, BrowserWindow, ipcMain, shell }= require("electron/main");
 const path = require("node:path");
 const fs = require('fs');
+let mainWindow;
+
+app.commandLine.appendSwitch('ignore-certificate-errors')
+app.commandLine.appendSwitch('ignore-gpu-blacklist')
+app.commandLine.appendSwitch('disable-gpu')
+app.commandLine.appendSwitch('disable-software-rasterizer')
 
 function createWindow() {
-  const mainWindow = new BrowserWindow({
+   mainWindow = new BrowserWindow({
 
     width: 1280, // Starting width
     height: 720, // Starting height
@@ -30,7 +36,6 @@ function createWindow() {
 
   mainWindow.loadFile("renderer/pages/index.html"); // Load the html file
   mainWindow.removeMenu(); // Remove the default menu
-  mainWindow.openDevTools();
 }
 
 /* 
@@ -52,44 +57,25 @@ app.whenReady().then(() => {
   
 });
 
+
+/*
+
+  Handle IPC functions
+
+*/
 ipcMain.on('open-pdf', (event, pdfPath) => {
   const fullPath = path.join(__dirname, '..', pdfPath)
   shell.openPath(fullPath)
 })
 
+ipcMain.on('toggle-dev-tools', () => {
+  if (mainWindow.webContents.isDevToolsOpened()) {
+    mainWindow.webContents.closeDevTools()
+  } else {
+    mainWindow.webContents.openDevTools()
+  }
+})
 
-// app.whenReady().then(() => {
-//   console.log('App is ready, registering IPC handlers...');
-//   ipcMain.handle('open-pdf', async (event, filename) => {
-//     console.log('Received request to open PDF:', filename);
-//     try {
-//       const filePath = path.join(__dirname, '../assets', filename);
-//       if (fs.existsSync(filePath)) {
-//         await shell.openPath(filePath);
-//         return null;
-//       } else {
-//         return 'File does not exist';
-//       }
-//     } catch (error) {
-//       console.error('Error opening PDF:', error);
-//       return error.message;
-//     }
-//   });
-
-//   createWindow();
-// });
-
-// app.on('window-all-closed', () => {
-//   if (process.platform !== 'darwin') {
-//     app.quit();
-//   }
-// });
-
-// app.on('activate', () => {
-//   if (BrowserWindow.getAllWindows().length === 0) {
-//     createWindow();
-//   }
-// });
 
 
 /*

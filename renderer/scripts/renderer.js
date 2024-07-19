@@ -4,3 +4,7 @@ function navigateTo(page) {
 function openPDF(pdfPath) {
   window.electronAPI.openPDF(pdfPath)
 }
+
+function toggleDevTools() {
+  window.electronAPI.toggleDevTools()
+}
