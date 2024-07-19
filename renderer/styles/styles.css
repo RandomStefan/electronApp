@@ -81,7 +81,7 @@ body {
   }
 }
 
-.main_header_buttons {
+.main_menu_buttons {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -89,7 +89,7 @@ body {
   gap: 10%;
 }
 
-.main_header {
+.main_menu {
   display: inline-block;
   width: auto;
   padding: 1em;
@@ -209,7 +209,7 @@ body {
   color: #fff;
 }
 
-.main_header_heading {
+.main_menu_heading {
   --s: 0.05em; /* the thickness of the line */
   --c: #295da1; /* the color */
 
@@ -226,7 +226,7 @@ body {
   cursor: default;
 }
 
-.main_header_heading:hover {
+.main_menu_heading:hover {
   --_p: 100%;
   --c: #295da1;
 }
