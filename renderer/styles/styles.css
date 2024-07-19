@@ -309,3 +309,18 @@ button:focus {
 .footer-right button:focus:not(:active) {
   box-shadow: rgb(68, 109, 187) 38%, 0 0 0 .125em;
 }
+
+.page_animation {
+  animation: fadeInAnimation ease 2s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeInAnimation {
+  0% {
+      opacity: 0;
+  }
+  100% {
+      opacity: 1;
+  }
+}

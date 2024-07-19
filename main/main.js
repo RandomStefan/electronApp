@@ -1,5 +1,6 @@
-const { app, BrowserWindow } = require("electron/main");
+const { app, BrowserWindow, ipcMain, shell }= require("electron/main");
 const path = require("node:path");
+const fs = require('fs');
 
 function createWindow() {
   const mainWindow = new BrowserWindow({
@@ -29,6 +30,7 @@ function createWindow() {
 
   mainWindow.loadFile("renderer/pages/index.html"); // Load the html file
   mainWindow.removeMenu(); // Remove the default menu
+  mainWindow.openDevTools();
 }
 
 /* 
@@ -47,7 +49,47 @@ app.whenReady().then(() => {
       createWindow();
     }
   });
+  
 });
+
+ipcMain.on('open-pdf', (event, pdfPath) => {
+  const fullPath = path.join(__dirname, '..', pdfPath)
+  shell.openPath(fullPath)
+})
+
+
+// app.whenReady().then(() => {
+//   console.log('App is ready, registering IPC handlers...');
+//   ipcMain.handle('open-pdf', async (event, filename) => {
+//     console.log('Received request to open PDF:', filename);
+//     try {
+//       const filePath = path.join(__dirname, '../assets', filename);
+//       if (fs.existsSync(filePath)) {
+//         await shell.openPath(filePath);
+//         return null;
+//       } else {
+//         return 'File does not exist';
+//       }
+//     } catch (error) {
+//       console.error('Error opening PDF:', error);
+//       return error.message;
+//     }
+//   });
+
+//   createWindow();
+// });
+
+// app.on('window-all-closed', () => {
+//   if (process.platform !== 'darwin') {
+//     app.quit();
+//   }
+// });
+
+// app.on('activate', () => {
+//   if (BrowserWindow.getAllWindows().length === 0) {
+//     createWindow();
+//   }
+// });
 
 
 /*
