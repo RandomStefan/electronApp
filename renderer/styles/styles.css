@@ -268,9 +268,8 @@ body {
   align-items: center;
 }
 
-.footer-right .svg-button i{
+.footer-right .svg-button i {
   font-size: 1.5em; /* Makes the icon 20% larger than the button text */
-
 }
 
 .footer-right button {
@@ -336,8 +335,287 @@ button:focus {
   }
 }
 
-#external-link
-{
+#external-link {
   text-decoration: underline;
   cursor: pointer;
+}
+
+/* Styles for forms */
+form {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+form div {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  color: #c5e5ff;
+  font-weight: bold;
+}
+
+input[type="text"],
+textarea,
+select {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.2);
+  color: #c5e5ff;
+}
+
+input[type="text"]:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(197, 229, 255, 0.5);
+}
+
+/* Style for submit buttons */
+form button[type="submit"],
+#deleteButton {
+  background: linear-gradient(
+    90deg,
+    rgb(68, 109, 187) 38%,
+    rgb(9, 102, 145) 68%,
+    rgb(119, 19, 212) 98%
+  );
+  color: #c5e5ff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+form button[type="submit"]:hover,
+#deleteButton:hover {
+  background: linear-gradient(
+    90deg,
+    rgb(95, 5, 179) 3%,
+    rgb(68, 109, 187) 38%,
+    rgb(9, 102, 145) 68%
+  );
+}
+
+/* Styles for entry list */
+#entriesList {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.entry {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.entry h3 {
+  color: #c5e5ff;
+  margin-bottom: 5px;
+}
+
+.entry p {
+  color: #a0d8ff;
+}
+
+/* Styles for pagination */
+#pagination {
+  margin-top: 20px;
+}
+
+#pagination button {
+  background: rgba(255, 255, 255, 0.1);
+  color: #c5e5ff;
+  border: none;
+  padding: 5px 10px;
+  margin: 0 5px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+#pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+#currentPage {
+  color: #c5e5ff;
+  margin: 0 10px;
+}
+
+.main_menu_subpage {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  height: 60px;
+  box-sizing: border-box;
+  z-index: 1000;
+}
+
+.main_menu_subpage_heading {
+  color: #c5e5ff;
+  font-family: system-ui, sans-serif;
+  font-size: 2rem;
+  margin: 0;
+}
+
+.main_menu_subpage_buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.main_menu_subpage_buttons button {
+  background-image: linear-gradient(
+    90deg,
+    rgb(68, 109, 187) 38%,
+    rgb(9, 102, 145) 68%,
+    rgb(119, 19, 212) 98%
+  );
+  background-size: 200% auto;
+  color: #c5e5ff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.main_menu_subpage_buttons button:hover {
+  background-position: right center;
+}
+
+.subpage_content {
+  margin-top: 80px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 130px); /* Adjust for header and footer */
+}
+
+form {
+  width: 100%;
+  max-width: 500px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+form div {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  color: #c5e5ff;
+  font-weight: bold;
+}
+
+input[type="text"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.2);
+  color: #c5e5ff;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(197, 229, 255, 0.5);
+}
+
+form button[type="submit"] {
+  background: linear-gradient(
+    90deg,
+    rgb(68, 109, 187) 38%,
+    rgb(9, 102, 145) 68%,
+    rgb(119, 19, 212) 98%
+  );
+  color: #c5e5ff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+form button[type="submit"]:hover {
+  background: linear-gradient(
+    90deg,
+    rgb(95, 5, 179) 3%,
+    rgb(68, 109, 187) 38%,
+    rgb(9, 102, 145) 68%
+  );
+}
+
+.style_button {
+  align-items: center;
+  appearance: none;
+  background-color: #295da1;
+  background-image: linear-gradient(
+    90deg,
+    rgb(68, 109, 187) 38%,
+    rgb(9, 102, 145) 68%,
+    rgb(119, 19, 212) 98%
+  );
+  background-size: calc(100% + 20px) calc(100% + 20px);
+  border-radius: 100px;
+  border-width: 0;
+  box-shadow: none;
+  box-sizing: border-box;
+  color: #c5e5ff;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: CircularStd, sans-serif;
+  font-size: 1rem;
+  height: auto;
+  justify-content: center;
+  line-height: 1.5;
+  padding: 6px 20px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.2s, background-position 0.2s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: top;
+  white-space: nowrap;
+}
+
+.style_button:active,
+.style_button:focus {
+  outline: none;
+}
+
+.style_button:hover {
+  background-position: -20px -20px;
+}
+
+.style_button:focus:not(:active) {
+  box-shadow: rgb(68, 109, 187) 38%, 0 0 0 0.125em;
 }

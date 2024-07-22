@@ -14,8 +14,9 @@ const Entry = sequelize.define('Entry', {
 
     content:
     {
-        type: DataTypes.text
+        type: DataTypes.TEXT
     }
+
 });
 
 sequelize.sync();

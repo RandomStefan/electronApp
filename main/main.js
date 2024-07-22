@@ -1,6 +1,7 @@
 const { app, BrowserWindow, ipcMain, shell } = require("electron/main");
 const path = require("node:path");
 const fs = require("fs");
+const { sequelize, Entry } = require('./database');
 let mainWindow;
 
 app.commandLine.appendSwitch("ignore-certificate-errors");
@@ -75,6 +76,58 @@ ipcMain.on("toggle-dev-tools", () => {
 
 ipcMain.on("open-link", (event, url) => {
   shell.openExternal(url);
+});
+
+
+ipcMain.handle('add-entry', async(event, entry)=>
+{
+  try{
+    const newEntry = await Entry.create(entry);
+    return newEntry;
+  } catch (error)
+  {
+    console.error('Error adding entry: ', error);
+    throw error;
+  }
+});
+
+ipcMain.handle('get-entries', async () => {
+  try {
+    const entries = await Entry.findAll();
+    return entries;
+  } catch (error) {
+    console.error('Error getting entries:', error);
+    throw error;
+  }
+});
+
+ipcMain.handle('update-entry', async (event, id, updatedEntry) => {
+  try {
+    const entry = await Entry.findByPk(id);
+    if (entry) {
+      await entry.update(updatedEntry);
+      return entry;
+    }
+    throw new Error('Entry not found');
+  } catch (error) {
+    console.error('Error updating entry:', error);
+    throw error;
+  }
+});
+
+
+ipcMain.handle('delete-entry', async (event, id) => {
+  try {
+    const entry = await Entry.findByPk(id);
+    if (entry) {
+      await entry.destroy();
+      return true;
+    }
+    throw new Error('Entry not found');
+  } catch (error) {
+    console.error('Error deleting entry:', error);
+    throw error;
+  }
 });
 
 /*
