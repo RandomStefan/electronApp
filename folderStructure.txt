@@ -1,0 +1,12 @@
+root
+ -assets
+ -main
+   -preload.js
+   -main.js
+ -renderer
+   -pages
+       -index.html
+   -styles
+   -scripts
+      -renderer.js
+package.json

@@ -41,5 +41,9 @@
   "devDependencies": {
     "electron": "^31.2.1",
     "electron-builder": "^24.13.3"
+  },
+  "dependencies": {
+    "sequelize": "^6.37.3",
+    "sqlite3": "^5.1.7"
   }
 }

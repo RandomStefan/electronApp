@@ -1,24 +1,23 @@
-const { app, BrowserWindow, ipcMain, shell }= require("electron/main");
+const { app, BrowserWindow, ipcMain, shell } = require("electron/main");
 const path = require("node:path");
-const fs = require('fs');
+const fs = require("fs");
 let mainWindow;
 
-app.commandLine.appendSwitch('ignore-certificate-errors')
-app.commandLine.appendSwitch('ignore-gpu-blacklist')
-app.commandLine.appendSwitch('disable-gpu')
-app.commandLine.appendSwitch('disable-software-rasterizer')
+app.commandLine.appendSwitch("ignore-certificate-errors");
+app.commandLine.appendSwitch("ignore-gpu-blacklist");
+app.commandLine.appendSwitch("disable-gpu");
+app.commandLine.appendSwitch("disable-software-rasterizer");
 
 function createWindow() {
-   mainWindow = new BrowserWindow({
-
+  mainWindow = new BrowserWindow({
     width: 1280, // Starting width
     height: 720, // Starting height
 
-    minWidth:1280, // Minimum width
-    minHeight:720, // Minimum height
+    minWidth: 1280, // Minimum width
+    minHeight: 720, // Minimum height
 
-    maxWidth:1600, // Maximum width
-    maxHeight:900, // Maximum height
+    maxWidth: 1600, // Maximum width
+    maxHeight: 900, // Maximum height
 
     darkTheme: true, // Forces dark theme on windows
     fullscreenable: false, // Disallows fullscreen
@@ -30,7 +29,7 @@ function createWindow() {
       preload: path.join(__dirname, "preload.js"), // Specify preload file
       contextIsolation: true,
       nodeIntegration: false,
-      enableRemoteModule: false
+      enableRemoteModule: false,
     },
   });
 
@@ -54,29 +53,29 @@ app.whenReady().then(() => {
       createWindow();
     }
   });
-  
 });
-
 
 /*
 
   Handle IPC functions
 
 */
-ipcMain.on('open-pdf', (event, pdfPath) => {
-  const fullPath = path.join(__dirname, '..', pdfPath)
-  shell.openPath(fullPath)
-})
+ipcMain.on("open-pdf", (event, pdfPath) => {
+  const fullPath = path.join(__dirname, "..", pdfPath);
+  shell.openPath(fullPath);
+});
 
-ipcMain.on('toggle-dev-tools', () => {
+ipcMain.on("toggle-dev-tools", () => {
   if (mainWindow.webContents.isDevToolsOpened()) {
-    mainWindow.webContents.closeDevTools()
+    mainWindow.webContents.closeDevTools();
   } else {
-    mainWindow.webContents.openDevTools()
+    mainWindow.webContents.openDevTools();
   }
-})
+});
 
-
+ipcMain.on("open-link", (event, url) => {
+  shell.openExternal(url);
+});
 
 /*
 
