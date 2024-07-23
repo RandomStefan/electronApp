@@ -1,7 +1,7 @@
 const { app, BrowserWindow, ipcMain, shell } = require("electron/main");
 const path = require("node:path");
 const fs = require("fs");
-const { sequelize, Entry } = require('./database');
+const { sequelize, Entry } = require("./database");
 let mainWindow;
 
 app.commandLine.appendSwitch("ignore-certificate-errors");
@@ -46,7 +46,7 @@ function createWindow() {
 
 */
 
-app.whenReady().then(() => {
+app.whenReady().then(async () => {
   createWindow();
 
   app.on("activate", () => {
@@ -54,6 +54,22 @@ app.whenReady().then(() => {
       createWindow();
     }
   });
+
+  try {
+    const testEntry = await Entry.create({
+      title: "Test Title",
+      content: "Test Content",
+    });
+    console.log("Test entry created:", testEntry.toJSON());
+
+    const entries = await Entry.findAll();
+    console.log(
+      "All entries:",
+      entries.map((e) => e.toJSON())
+    );
+  } catch (error) {
+    console.error("Error testing database:", error);
+  }
 });
 
 /*
@@ -78,15 +94,14 @@ ipcMain.on("open-link", (event, url) => {
   shell.openExternal(url);
 });
 
-
-ipcMain.handle('add-entry', async(event, entry)=>
-{
-  try{
+ipcMain.handle("add-entry", async (event, entry) => {
+  try {
+    console.log("Received entry to add:", entry);
     const newEntry = await Entry.create(entry);
-    return newEntry;
-  } catch (error)
-  {
-    console.error('Error adding entry: ', error);
+    console.log("New entry created:", newEntry.toJSON());
+    return newEntry.toJSON();
+  } catch (error) {
+    console.error("Error adding entry:", error);
     throw error;
   }
 });
@@ -94,38 +109,38 @@ ipcMain.handle('add-entry', async(event, entry)=>
 ipcMain.handle('get-entries', async () => {
   try {
     const entries = await Entry.findAll();
-    return entries;
+    console.log('Retrieved entries in main process:', entries.map(e => e.toJSON()));
+    return entries.map(e => e.toJSON());
   } catch (error) {
     console.error('Error getting entries:', error);
     throw error;
   }
 });
 
-ipcMain.handle('update-entry', async (event, id, updatedEntry) => {
+ipcMain.handle("update-entry", async (event, id, updatedEntry) => {
   try {
     const entry = await Entry.findByPk(id);
     if (entry) {
       await entry.update(updatedEntry);
       return entry;
     }
-    throw new Error('Entry not found');
+    throw new Error("Entry not found");
   } catch (error) {
-    console.error('Error updating entry:', error);
+    console.error("Error updating entry:", error);
     throw error;
   }
 });
 
-
-ipcMain.handle('delete-entry', async (event, id) => {
+ipcMain.handle("delete-entry", async (event, id) => {
   try {
     const entry = await Entry.findByPk(id);
     if (entry) {
       await entry.destroy();
       return true;
     }
-    throw new Error('Entry not found');
+    throw new Error("Entry not found");
   } catch (error) {
-    console.error('Error deleting entry:', error);
+    console.error("Error deleting entry:", error);
     throw error;
   }
 });

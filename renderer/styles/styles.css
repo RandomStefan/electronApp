@@ -378,35 +378,12 @@ select:focus {
   box-shadow: 0 0 5px rgba(197, 229, 255, 0.5);
 }
 
-/* Style for submit buttons */
-form button[type="submit"],
-#deleteButton {
-  background: linear-gradient(
-    90deg,
-    rgb(68, 109, 187) 38%,
-    rgb(9, 102, 145) 68%,
-    rgb(119, 19, 212) 98%
-  );
-  color: #c5e5ff;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
+/* Add this to your existing styles.css or replace the previous #entriesList styles */
 
-form button[type="submit"]:hover,
-#deleteButton:hover {
-  background: linear-gradient(
-    90deg,
-    rgb(95, 5, 179) 3%,
-    rgb(68, 109, 187) 38%,
-    rgb(9, 102, 145) 68%
-  );
-}
-
-/* Styles for entry list */
 #entriesList {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 2 columns */
+  grid-gap: 20px;
   background: rgba(255, 255, 255, 0.1);
   padding: 20px;
   border-radius: 10px;
@@ -416,20 +393,39 @@ form button[type="submit"]:hover,
 
 .entry {
   background: rgba(255, 255, 255, 0.05);
-  padding: 10px;
-  margin-bottom: 10px;
+  padding: 15px;
   border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  height: 200px; /* Fixed height for consistent look */
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.entry:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .entry h3 {
   color: #c5e5ff;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
+  font-size: 1.2em;
 }
 
 .entry p {
   color: #a0d8ff;
+  flex-grow: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  #entriesList {
+    grid-template-columns: 1fr; /* Single column on smaller screens */
+  }
+}
 /* Styles for pagination */
 #pagination {
   margin-top: 20px;
@@ -618,4 +614,44 @@ form button[type="submit"]:hover {
 
 .style_button:focus:not(:active) {
   box-shadow: rgb(68, 109, 187) 38%, 0 0 0 0.125em;
+}
+
+
+textarea
+{
+  resize:none;
+}
+
+#statusMessage {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+
+.subpage_content form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.subpage_content form div {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.subpage_content form label {
+  align-self: flex-start;
+  margin-bottom: 5px;
+}
+
+.subpage_content form input,
+.subpage_content form textarea,
+.subpage_content form select {
+  width: 100%;
+}
+
+.subpage_content form button {
+  width: 100%;
+  margin-top: 10px;
 }
